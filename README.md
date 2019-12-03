@@ -1,3 +1,4 @@
+![](https://github.com/octera/ChristmasLight/workflows/Build/badge.svg)
 #Christmas Light
 This project aim to provide an ESP8266 controller for WS2811 led or equivalent (A.K.A NeoPixel) in order to provide beautiful effect on christmas tree.
 
