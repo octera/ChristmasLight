@@ -77,10 +77,10 @@ void arduinoOta() {
 #define NUM_LEDS  100  // CHANGEME
 CRGB leds[NUM_LEDS];
 BaseEffect* effects[] = {
+  new MeteorRain("MeteorRain"),
   new RunningLights("RunningLight"),
   new FireEffect<NUM_LEDS>("fire"),
   new RainbowEffect("rainbow"),
-  new SolidEffect("solid"),
   new TwinkleEffect<NUM_LEDS>("twinkle"),
   new ApplauseEffect("applause"),
   new JuggleEffect("juggle")
