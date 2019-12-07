@@ -1,9 +1,9 @@
 #pragma once
 
-#include <LEDEffect.hpp>
+#include "ExtendedBaseEffect.hpp"
 
 // A rainbow that moves along the leds
-class RunningLights final : public BaseEffect
+class RunningLights final : public ExtendedBaseEffect
 {
 public:
   CRGB color;
@@ -11,30 +11,10 @@ public:
   float waveNumber;
 
   RunningLights(const char* name, CRGB color = CRGB::White, float waveNumber = 4 ) : 
-    BaseEffect(name, 2 * JSON_NODE_SIZE), color(color), waveNumber(waveNumber) { };
+    ExtendedBaseEffect(name, 2 * JSON_NODE_SIZE), color(color), waveNumber(waveNumber) { };
 
   void deserialize(JsonObject& data) override {
-    // deltaHue
-    if (data.containsKey("color_rgb")) {
-      LEDEFFECT_DEBUG_PRINT(F("RunningLights: color_rgb to ["));
-      LEDEFFECT_DEBUG_PRINT(data["color_rgb"][0].as<uint8_t>());
-      LEDEFFECT_DEBUG_PRINT(F(", "));
-      LEDEFFECT_DEBUG_PRINT(data["color_rgb"][1].as<uint8_t>());
-      LEDEFFECT_DEBUG_PRINT(F(", "));
-      LEDEFFECT_DEBUG_PRINT(data["color_rgb"][2].as<uint8_t>());
-      LEDEFFECT_DEBUG_PRINTLN(F("]"));
-      color = CRGB(data["color_rgb"][0], data["color_rgb"][1], data["color_rgb"][2]);
-    // color hsv
-    } else if (data.containsKey("color_hsv")) {
-      LEDEFFECT_DEBUG_PRINT(F("RunningLights: color_hsv to ["));
-      LEDEFFECT_DEBUG_PRINT(data["color_hsv"][0].as<uint8_t>());
-      LEDEFFECT_DEBUG_PRINT(F(", "));
-      LEDEFFECT_DEBUG_PRINT(data["color_hsv"][1].as<uint8_t>());
-      LEDEFFECT_DEBUG_PRINT(F(", "));
-      LEDEFFECT_DEBUG_PRINT(data["color_hsv"][2].as<uint8_t>());
-      LEDEFFECT_DEBUG_PRINTLN(F("]"));
-      color = CHSV(data["color_hsv"][0], data["color_hsv"][1], data["color_hsv"][2]);
-    }
+    deserializeJsonColor(data, &color);
 
     // rate
     if (data.containsKey("rate")) {
