@@ -78,6 +78,7 @@ void arduinoOta() {
 CRGB leds[NUM_LEDS];
 BaseEffect* effects[] = {
   new MeteorRain("MeteorRain"),
+  new BoucingBall("BouncingBall"),
   new RunningLights("RunningLight"),
   new FireEffect<NUM_LEDS>("fire"),
   new RainbowEffect("rainbow"),
@@ -85,7 +86,7 @@ BaseEffect* effects[] = {
   new ApplauseEffect("applause"),
   new JuggleEffect("juggle")
 };
-const uint8_t effectCount = 7;
+const uint8_t effectCount = 8;
 LedEffect strip(effects, effectCount);
 void setupLedEffect() {
     strip.begin(&FastLED.addLeds<WS2811, DATA_PIN>(leds, NUM_LEDS));
