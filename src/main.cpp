@@ -47,7 +47,7 @@ void arduinoOta() {
   // ArduinoOTA.setPort(8266);
 
   // Hostname defaults to esp8266-[ChipID]
-  ArduinoOTA.setHostname("ChristmasLight");
+  ArduinoOTA.setHostname("ChristmasLightOutdoor");
 
   // No authentication by default
   ArduinoOTA.setPassword((const char *)"123");
@@ -74,7 +74,10 @@ void arduinoOta() {
 
 // Strip
 #define DATA_PIN  D7  // CHANGEME
-#define NUM_LEDS  100  // CHANGEME
+#ifndef NUM_LEDS
+  #define NUM_LEDS  300  // CHANGEME
+#endif
+
 CRGB leds[NUM_LEDS];
 BaseEffect* effects[] = {
   new MeteorRain("MeteorRain"),
