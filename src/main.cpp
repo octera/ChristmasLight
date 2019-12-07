@@ -98,6 +98,7 @@ void setupLedEffect() {
 Ticker effectChanger;
 bool changeEffect = true;
 void changeStateTicker() {
+  effectChanger.detach(); //if changeState is called manually (eg http request)
   effectChanger.attach(DELAY_BETWEEN_EFFECT, changeStateTicker);
   if (changeEffect) {
     shiftright(effects,effectCount);
