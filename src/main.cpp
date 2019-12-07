@@ -42,13 +42,15 @@ void wifiManager() {
     Serial.println("connected...yeey :)");
 }
 
+#define STR(x)  x
 void arduinoOta() {
   // Port defaults to 8266
   // ArduinoOTA.setPort(8266);
 
   // Hostname defaults to esp8266-[ChipID]
-  ArduinoOTA.setHostname("ChristmasLightOutdoor");
-
+  #ifdef BOARD_NAME
+  ArduinoOTA.setHostname(STR(BOARD_NAME));
+  #endif
   // No authentication by default
   ArduinoOTA.setPassword((const char *)"123");
 
