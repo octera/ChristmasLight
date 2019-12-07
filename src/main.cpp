@@ -94,12 +94,13 @@ void setupLedEffect() {
 
 
 //Ticker part
-#define DELAY_BETWEEN_EFFECT 120
+#define DEFAULT_DELAY_BETWEEN_EFFECT 120
+uint8_t delayBetweenEffect = DEFAULT_DELAY_BETWEEN_EFFECT;
 Ticker effectChanger;
 bool changeEffect = true;
 void changeStateTicker() {
   effectChanger.detach(); //if changeState is called manually (eg http request)
-  effectChanger.attach(DELAY_BETWEEN_EFFECT, changeStateTicker);
+  effectChanger.attach(delayBetweenEffect, changeStateTicker);
   if (changeEffect) {
     shiftright(effects,effectCount);
     strip = LedEffect(effects, effectCount);
@@ -107,7 +108,7 @@ void changeStateTicker() {
   }
 }
 void ticker(){
-  effectChanger.attach(DELAY_BETWEEN_EFFECT, changeStateTicker);
+  effectChanger.attach(delayBetweenEffect, changeStateTicker);
 
 }
 
