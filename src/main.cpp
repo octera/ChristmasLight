@@ -84,11 +84,11 @@ void arduinoOta() {
 
 CRGB leds[NUM_LEDS];
 BaseEffect* effects[] = {
+  new RainbowEffectWithHoles("rainbow"),
   new MeteorRain("MeteorRain"),
   new BoucingBall("BouncingBall"),
   new RunningLights("RunningLight"),
   new FireEffect<NUM_LEDS>("fire"),
-  new RainbowEffect("rainbow"),
   new TwinkleEffect<NUM_LEDS>("twinkle"),
   new ApplauseEffect("applause"),
   new JuggleEffect("juggle")
