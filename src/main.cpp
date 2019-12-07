@@ -76,8 +76,10 @@ void arduinoOta() {
 
 // Strip
 #define DATA_PIN  D7  // CHANGEME
-#ifndef NUM_LEDS
-  #define NUM_LEDS  300  // CHANGEME
+#ifdef LEDS_COUNT
+  #define NUM_LEDS  LEDS_COUNT  // CHANGEME
+#else
+  #define NUM_LEDS 300
 #endif
 
 CRGB leds[NUM_LEDS];

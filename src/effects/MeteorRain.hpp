@@ -61,7 +61,7 @@ public:
   {
     if (millis() < nextTimeToTick)
       return; //not time to do anything
-    nextTimeToTick = millis() + 30;
+    nextTimeToTick = millis() + speedDelay;
     // fade brightness all LEDs one step
     for (int j = 0; j < _controller->size(); j++)
     {
@@ -82,7 +82,7 @@ public:
     }
 
     step++;
-    if (step == _controller->size() + _controller->size())
+    if (step == _controller->size())
     {
       step = 0;
     }
