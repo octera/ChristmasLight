@@ -48,9 +48,9 @@ public:
     }
 
     //fill hole
-    for (uint8_t i = holeShift; i<_controller->size(); i=i+spaceBeetweenHole) {
+    for (uint16_t i = holeShift; i<_controller->size(); i=i+spaceBeetweenHole) {
         for (uint8_t j = 0; j<holeSize;j++) {
-            if (j>=_controller->size()) {
+            if (i+j>=_controller->size()) {
                 return; //Here we have reached end of leds for this loop
             }
             _controller->leds()[i+j] = CRGB::Black;
@@ -62,5 +62,5 @@ public:
 protected:
   uint8_t _hue = 0;
   unsigned long nextTimeToTick = 0; 
-  uint8_t holeShift = 0;
+  uint16_t holeShift = 0;
 };
