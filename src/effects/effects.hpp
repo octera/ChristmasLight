@@ -2,3 +2,4 @@
 #include "BouncingBall.hpp"
 #include "MeteorRain.hpp"
 #include "RainbowWithHoles.hpp"
+#include "CandyCane.hpp"
