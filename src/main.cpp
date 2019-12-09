@@ -10,6 +10,13 @@
 #include <LEDEffect.h>
 #include <Ticker.h>
 #include "effects/effects.hpp"
+#include <EasyButton.h>
+
+// Arduino pin where the button is connected to.
+#define BUTTON_PIN 0
+
+// Instance of the button.
+EasyButton button(BUTTON_PIN);
 
 void shiftright (BaseEffect* myarray[], int size)
 {
@@ -127,6 +134,11 @@ void setup() {
     arduinoOta();
     setupLedEffect();
     ticker();
+
+    button.begin();
+    // Add the callback function to be called when the button is pressed.
+    button.onPressed(changeStateTicker);
+
 }
 
 void loop() {
@@ -134,4 +146,5 @@ void loop() {
 
   // Strip
   strip.loop();
+  button.read();
 }
