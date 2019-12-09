@@ -7,7 +7,7 @@ class RunningLights final : public ExtendedBaseEffect
 {
 public:
   CRGB color;
-  float rate = 0.2;       // rate of change of hue on each loop
+  float rate = 0.4;       // rate of change of hue on each loop
   float waveNumber;
 
   RunningLights(const char* name, CRGB color = CRGB::White, float waveNumber = 4 ) : 
@@ -42,9 +42,9 @@ public:
 
   void loop() override {
     _position += rate;
-    float sinRatio = 2 * PI / _controller->size() * waveNumber;
+    float sinRatio = 255.0 / _controller->size() * waveNumber;
     for(int i=0; i<_controller->size(); i++) {
-        float level = sin((i+_position)*sinRatio) * 127 + 128;
+        uint8_t level = sin8((i+_position)*sinRatio);
         _controller->leds()[i] = color%level;
       }
   }
