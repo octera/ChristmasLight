@@ -82,7 +82,7 @@ void arduinoOta() {
 }
 
 // Strip
-#define DATA_PIN  D7  // CHANGEME
+#define DATA_PIN  D1  // CHANGEME
 #ifdef LEDS_COUNT
   #define NUM_LEDS  LEDS_COUNT  // CHANGEME
 #else
@@ -91,11 +91,11 @@ void arduinoOta() {
 
 CRGB leds[NUM_LEDS];
 BaseEffect* effects[] = {
+  new RunningLights("RunningLight"),
   new CandyCane("CandyCane"),
   new RainbowEffectWithHoles("rainbow"),
   new MeteorRain("MeteorRain"),
   new BoucingBall("BouncingBall"),
-  new RunningLights("RunningLight"),
   new FireEffect<NUM_LEDS>("fire"),
   new TwinkleEffect<NUM_LEDS>("twinkle"),
   new ApplauseEffect("applause"),
@@ -109,7 +109,9 @@ void setupLedEffect() {
 
 
 //Ticker part
-#define DELAY_BETWEEN_EFFECT 120
+#ifndef DELAY_BETWEEN_EFFECT
+#define DELAY_BETWEEN_EFFECT 60
+#endif
 Ticker effectChanger;
 bool changeEffect = true;
 void changeStateTicker() {
@@ -130,19 +132,19 @@ void setup() {
 	  Serial.begin(9600);
 	  Serial.println("resetting");
 
-    wifiManager();
-    arduinoOta();
+ //   wifiManager();
+ //   arduinoOta();
     setupLedEffect();
     ticker();
 
     button.begin();
     // Add the callback function to be called when the button is pressed.
     button.onPressed(changeStateTicker);
-
 }
 
 void loop() {
-  ArduinoOTA.handle();
+ // ArduinoOTA.handle();
+	  Serial.println("loop");
 
   // Strip
   strip.loop();
